@@ -23,11 +23,13 @@ in stdenv.mkDerivation {
 
   setSourceRoot = "sourceRoot=`pwd`";
 
+  dontStrip = true;
+
   installPhase = ''
     mkdir -p $out/bin
 
     for bin in granted assume assume.fish; do
-      cp $bin $out/bin/
+      mv $bin $out/bin/
       chmod +x $out/bin/$bin
     done
 

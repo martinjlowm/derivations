@@ -1,21 +1,24 @@
+{ pkgs, ... } @ args:
+
 with
   (import <nixpkgs> { });
 
 let
   version = "0.14.0";
-  system = builtins.currentSystem;
-  systemAttr = builtins.listToAttrs (lib.lists.zipListsWith (l: r: { name = l; value = r; }) ["arch" "kernel"] (lib.strings.splitString "-" system));
+  systemAttr = builtins.listToAttrs (
+    lib.lists.zipListsWith
+      (l: r: { name = l; value = r; })
+      ["arch" "kernel"]
+      (lib.strings.splitString "-" pkgs.stdenv.system)
+  );
   kernel = systemAttr.kernel;
   arch = systemAttr.arch;
-  hashes = {
-    x86_64-darwin = "sha256-kbnocFXZQbv0x8VroZkI/BH0LNgVf5zUc57Q5quejqU=";
-  };
 in stdenv.mkDerivation {
   name = "granted.dev-${version}";
 
   src = pkgs.fetchurl {
     url = "https://releases.commonfate.io/granted/v${version}/granted_${version}_${kernel}_${arch}.tar.gz";
-    sha256 = hashes.${system} or "";
+    sha256 = "sha256-kbnocFXZQbv0x8VroZkI/BH0LNgVf5zUc57Q5quejqU=";
   };
 
   setSourceRoot = "sourceRoot=`pwd`";

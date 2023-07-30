@@ -1,3 +1,0 @@
-{
-  granted = import ./granted;
-}

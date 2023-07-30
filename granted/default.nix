@@ -1,8 +1,5 @@
 { pkgs, ... } @ args:
 
-with
-  (import <nixpkgs> { });
-
 let
   version = "0.14.0";
   cdn = "releases.commonfate.io";
@@ -32,7 +29,7 @@ let
       sha256 = "";
     };
   };
-in stdenv.mkDerivation {
+in pkgs.stdenv.mkDerivation {
   name = "granted.dev-${version}";
 
   src = pkgs.fetchurl urls.${pkgs.stdenv.system};
@@ -53,7 +50,7 @@ in stdenv.mkDerivation {
     ln -s $out/bin/granted $out/bin/assumego
   '';
 
-  meta = with lib; {
+  meta = with pkgs.lib; {
     homepage = "https://www.granted.dev/";
     description = "A CLI application which provides the world’s best developer UX for finding and accessing cloud roles to multiple cloud accounts, fast!";
     platforms = platforms.linux ++ platforms.darwin ++ platforms.windows;

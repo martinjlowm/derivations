@@ -1,3 +1,29 @@
 * Nix Derivations
 
+Usage with Flakes:
+
+#+BEGIN_SRC nix
+{
+  inputs = {
+    ...
+    martinjlowm.url = "github:martinjlowm/derivations";
+  };
+
+  outputs = { self, martinjlowm, ... } @ inputs:
+
+    let
+      system = builtins.currentSystem;
+      martinjlowmpkgs = martinjlowm.packages.${system};
+    in
+      {
+         ...
+         martinjlowmpkgs.<package>
+         ...
+      };
+}
+#+END_SRC
+
+
+The repository currently holds derivations for the following tools:
+
 - Granted (https://www.granted.dev/)

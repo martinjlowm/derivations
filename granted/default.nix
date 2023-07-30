@@ -5,26 +5,43 @@ with
 
 let
   version = "0.14.0";
-  systemAttr = builtins.listToAttrs (
-    lib.lists.zipListsWith
-      (l: r: { name = l; value = r; })
-      ["arch" "kernel"]
-      (lib.strings.splitString "-" pkgs.stdenv.system)
-  );
-  kernel = systemAttr.kernel;
-  arch = systemAttr.arch;
+  cdn = "releases.commonfate.io";
+  urls = {
+    x86_64-linux = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_linux_x86_64.tar.gz";
+      sha256 = "";
+    };
+    aarch64-linux = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_linux_arm64.tar.gz";
+      sha256 = "";
+    };
+    x86_64-darwin = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_darwin_x86_64.tar.gz";
+      sha256 = "sha256-kbnocFXZQbv0x8VroZkI/BH0LNgVf5zUc57Q5quejqU=";
+    };
+    aarch64-darwin = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_darwin_arm64.tar.gz";
+      sha256 = "";
+    };
+    x86_64-windows = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_windows_x86_64.zip";
+      sha256 = "";
+    };
+    aarch64-windows = {
+      url = "https://${cdn}/granted/v${version}/granted_${version}_windows_arm64.zip";
+      sha256 = "";
+    };
+  };
 in stdenv.mkDerivation {
   name = "granted.dev-${version}";
 
-  src = pkgs.fetchurl {
-    url = "https://releases.commonfate.io/granted/v${version}/granted_${version}_${kernel}_${arch}.tar.gz";
-    sha256 = "sha256-kbnocFXZQbv0x8VroZkI/BH0LNgVf5zUc57Q5quejqU=";
-  };
+  src = pkgs.fetchurl urls.${pkgs.stdenv.system};
 
   setSourceRoot = "sourceRoot=`pwd`";
 
   dontStrip = true;
 
+  # Windnows needs extra attention here I presume...
   installPhase = ''
     mkdir -p $out/bin
 

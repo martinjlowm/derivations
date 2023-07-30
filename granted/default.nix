@@ -6,7 +6,7 @@ let
   urls = {
     x86_64-linux = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_linux_x86_64.tar.gz";
-      sha256 = "";
+      sha256 = "sha256-wHeh+BbeMtbJMEDZxOvihqcNpA4pR0s0Re0vhxcbq88=";
     };
     aarch64-linux = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_linux_arm64.tar.gz";

@@ -18,7 +18,7 @@ let
     };
     aarch64-darwin = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_darwin_arm64.tar.gz";
-      sha256 = "";
+      sha256 = "sha256-G24ika1dcGvigl6CmIo7YNFfFvJmxQp628BJFVsFEaI=";
     };
     x86_64-windows = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_windows_x86_64.zip";

@@ -1,32 +1,32 @@
 { pkgs, ... } @ args:
 
 let
-  version = "0.14.0";
+  version = "0.14.2";
   cdn = "releases.commonfate.io";
   urls = {
     x86_64-linux = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_linux_x86_64.tar.gz";
-      sha256 = "sha256-wHeh+BbeMtbJMEDZxOvihqcNpA4pR0s0Re0vhxcbq88=";
+      sha256 = "sha256-tNg1shC+qcxpjRbuDRCbJ7CePFfQns8lyn5xEZHv1h4==";
     };
     aarch64-linux = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_linux_arm64.tar.gz";
-      sha256 = "";
+      sha256 = "sha256-ZA8GHmtid4qUHn09FOmKTj1+ynrFN01IMJq+6ETlMCI=";
     };
     x86_64-darwin = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_darwin_x86_64.tar.gz";
-      sha256 = "sha256-kbnocFXZQbv0x8VroZkI/BH0LNgVf5zUc57Q5quejqU=";
+      sha256 = "sha256-YmNAA6TMafwIzvpVzvwMGEshvlzLAYhPbWWlQ+i48cY=";
     };
     aarch64-darwin = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_darwin_arm64.tar.gz";
-      sha256 = "sha256-G24ika1dcGvigl6CmIo7YNFfFvJmxQp628BJFVsFEaI=";
+      sha256 = "sha256-7EY3MEnaTPUrz2Dk+RmICol8qeIpqe6bBBBCXG2fTQA==";
     };
     x86_64-windows = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_windows_x86_64.zip";
-      sha256 = "";
+      sha256 = "sha256-BvDX+tAw8hvexdxwk5Nb+0hPP5f7UZKZeN/PlXLCdFQ=";
     };
     aarch64-windows = {
       url = "https://${cdn}/granted/v${version}/granted_${version}_windows_arm64.zip";
-      sha256 = "";
+      sha256 = "sha256-9otJNz3XyuSGOwt9xOUWIqxSlfReE9WdfHcGKApyato=";
     };
   };
 in pkgs.stdenv.mkDerivation {
